@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework.authtoken',
+    'drf_spectacular',
     #local apps
     'Accounts.apps.AccountsConfig',
     'Apis.apps.ApisConfig',
@@ -107,6 +108,8 @@ AUTH_USER_MODEL = "Accounts.User"
 
 
 
+
+
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES":['rest_framework.permissions.IsAuthenticated'],
     "DEFAULT_AUTHENTICATION_CLASSES":[
@@ -115,9 +118,15 @@ REST_FRAMEWORK = {
 ],
 'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
-    ]
+    ],
+"DEFAULT_SCHEMA_CLASS":[
+    'drf_spectacular.openapi.AutoSchema'
+]
 }
 
+SPECTACULAR_SETTINGS = {
+    "TITLE":"API-FOR-TWITTER-CLONE"
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

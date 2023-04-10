@@ -6,7 +6,7 @@ from Base.models import comments,likes,Tweets
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ('id','username' , 'first_name', 'last_name' , 'email' , 'date_joined')
+        fields = ('id','username' , 'first_name', 'last_name' , 'email' , 'date_joined',)
 
 class CommentSerializer(serializers.ModelSerializer):
     commented_by = serializers.SlugRelatedField(
@@ -16,7 +16,7 @@ class CommentSerializer(serializers.ModelSerializer):
         )
     class Meta:
         model = comments
-        fields = ('comment' , 'commented_by')
+        fields = ('comment' , 'commented_by',)
 
 class AddCommentSerializer(serializers.ModelSerializer):
     commented_by = serializers.HiddenField(default=serializers.CurrentUserDefault())
@@ -59,7 +59,7 @@ class TweetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tweets
-        fields = ('id' , 'user' , 'content')
+        fields = ('id' , 'user' , 'content',)
 
 
 class DetailTweetSerializer(serializers.ModelSerializer):
@@ -76,7 +76,7 @@ class DetailTweetSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Tweets
-        fields = ('user' , 'content' , 'comments','likes')
+        fields = ('user' , 'content' , 'comments','likes',)
 
 class BookmarkSerializer(serializers.ModelSerializer):
     class Meta:
