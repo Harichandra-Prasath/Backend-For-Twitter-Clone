@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #3rd party app
     'rest_framework',
+    'corsheaders',
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'allauth',
@@ -55,12 +56,18 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+"http://localhost:3000",
+"http://localhost:8000",
+)
 
 ROOT_URLCONF = 'twitter.urls'
 
@@ -107,7 +114,8 @@ DATABASES={
 AUTH_USER_MODEL = "Accounts.User"
 
 
-
+CSRF_TRUSTED_ORIGINS = ['moz-extension://dfedb107-3e04-4452-94df-1a01d27887c8',
+                        'http://localhost:3000']
 
 
 REST_FRAMEWORK = {
@@ -119,14 +127,8 @@ REST_FRAMEWORK = {
 'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ],
-"DEFAULT_SCHEMA_CLASS":[
-    'drf_spectacular.openapi.AutoSchema'
-]
 }
 
-SPECTACULAR_SETTINGS = {
-    "TITLE":"API-FOR-TWITTER-CLONE"
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

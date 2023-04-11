@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from Base.models import comments,likes,Tweets
+from Base.models import Comments,Likes,Tweets,Bookmarks
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,19 +15,18 @@ class CommentSerializer(serializers.ModelSerializer):
             slug_field= 'username'
         )
     class Meta:
-        model = comments
+        model = Comments
         fields = ('comment' , 'commented_by',)
 
 class AddCommentSerializer(serializers.ModelSerializer):
-    commented_by = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    #commented_by = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
-        model = comments
+        model = Comments
         fields = "__all__"
 
 class AddlikeSerializer(serializers.ModelSerializer):
-    liked_by = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
-        model = likes
+        model = Likes
         fields = "__all__"
 
 
@@ -39,7 +38,7 @@ class LikeSerializer(serializers.ModelSerializer):
     )   
 
     class Meta:
-        model = likes
+        model = Likes
         fields = ('liked_by',)
 
 class TweetPostSerializer(serializers.ModelSerializer):
@@ -78,7 +77,9 @@ class DetailTweetSerializer(serializers.ModelSerializer):
         model = Tweets
         fields = ('user' , 'content' , 'comments','likes',)
 
-class BookmarkSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tweets
-        fields = ['bookmarked_by',]
+class ShowBookmarkSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Bookmarks
+        fields = ("bookmarks",)
+
+
