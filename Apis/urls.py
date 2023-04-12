@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import ShowTweets ,DetailShowTweet,PostTweet,Comment,Like,ShowUsers,ShowDetailUser,ShowUserTweets,ShowBookmark,Addbookmark
-
+from .views import ShowTweets ,DetailShowTweet,PostTweet,Comment,Like,ShowUsers,ShowDetailUser,ShowUserTweets,ShowBookmark,Addbookmark,Showfollowings,Addfollowing,Showfollowers
 
 urlpatterns = [
     path("tweets/" , ShowTweets.as_view() ),
@@ -13,4 +12,7 @@ urlpatterns = [
     path("users/<int:user_id>/tweets", ShowUserTweets.as_view() ),
     path("users/<int:user_id>/bookmark", ShowBookmark.as_view() ),
     path("tweets/<int:tweet_id>/addbookmark/" , Addbookmark ),
+    path("users/<int:user_id>/follow/", Addfollowing),
+    path("users/<int:user_id>/followers/" , Showfollowers.as_view()),
+    path("users/<int:user_id>/followings/" , Showfollowings.as_view())
 ]       

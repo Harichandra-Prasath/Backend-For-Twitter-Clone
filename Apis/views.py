@@ -3,9 +3,9 @@ from django.shortcuts import render,HttpResponse
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.decorators import api_view
-from Base.models import Tweets,Comments,Likes,Bookmarks
+from Base.models import Tweets,Comments,Likes,Bookmarks,Following
 from django.contrib.auth import get_user_model
-from .serializers import TweetSerializer,DetailTweetSerializer,TweetPostSerializer,AddCommentSerializer,AddlikeSerializer,UserSerializer
+from .serializers import TweetSerializer,DetailTweetSerializer,TweetPostSerializer,AddCommentSerializer,AddlikeSerializer,UserSerializer,FollowerSerializer
 from .permissions import IsOwnerorRead,IsOwner
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -118,3 +118,42 @@ def Addbookmark(request,**kwargs):
 
     
 
+class Showfollowings(generics.ListAPIView):
+    lookup_url_kwarg = "user_id"
+    def get_queryset(self):
+        user_id = self.kwargs.get(self.lookup_url_kwarg)
+
+        try:
+            Following.objects.get(user=get_user_model().objects.get(pk=user_id)) 
+        except ObjectDoesNotExist:
+            Following.objects.create(user=get_user_model().objects.get(pk=user_id))
+        
+        following = get_user_model().objects.get(pk=user_id).Fuser.following.all()
+        print(following)
+        return following
+    serializer_class = UserSerializer
+
+@api_view(["POST"])
+def Addfollowing(request,**kwargs):
+    user_id = kwargs.get("user_id")
+    user = get_user_model().objects.get(pk=user_id)
+    try:
+            Following.objects.get(user=request.user) 
+    except ObjectDoesNotExist:
+           following =  Following.objects.create(user=request.user)
+           following.following.add(user)
+           return Response({"message":"Succesfully followed"})
+
+    if user not in Following.objects.get(user=request.user).following.all():
+        Bookmarks.objects.get(user=request.user).bookmarks.add(user)
+        return Response({"message":"Succesfully followed"})
+    return Response({"Error":"Already in Followers"})
+
+class Showfollowers(generics.ListAPIView):
+    lookup_url_kwarg = "user_id"
+    def get_queryset(self):
+        user_id = self.kwargs.get(self.lookup_url_kwarg)
+        user =  get_user_model().objects.get(pk=user_id)
+        followers = Following.objects.filter(following=user)
+        return followers
+    serializer_class = FollowerSerializer

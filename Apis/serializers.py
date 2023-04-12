@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from Base.models import Comments,Likes,Tweets,Bookmarks
+from Base.models import Comments,Likes,Tweets,Following
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -77,9 +77,8 @@ class DetailTweetSerializer(serializers.ModelSerializer):
         model = Tweets
         fields = ('user' , 'content' , 'comments','likes',)
 
-class ShowBookmarkSerializer(serializers.ModelSerializer):
-     class Meta:
-        model = Bookmarks
-        fields = ("bookmarks",)
-
+class FollowerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Following
+        fields = ('user',)
 

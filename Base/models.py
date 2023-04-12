@@ -21,9 +21,9 @@ class Likes(models.Model):
     liked_by = models.ForeignKey(AUTH_USER_MODEL,on_delete=models.CASCADE)
     liked_on = models.ForeignKey(Tweets , on_delete=models.CASCADE,related_name='likes')
 
-class Friendlist(models.Model):
-    user = models.OneToOneField(AUTH_USER_MODEL , on_delete=models.CASCADE,related_name="user")
-    friends = models.ManyToManyField(AUTH_USER_MODEL,blank=True,related_name="friends")
+class Following(models.Model):
+    user = models.OneToOneField(AUTH_USER_MODEL , on_delete=models.CASCADE,related_name="Fuser")
+    following = models.ManyToManyField(AUTH_USER_MODEL,blank=True,related_name="following")
 
     
 
