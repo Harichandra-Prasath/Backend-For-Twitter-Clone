@@ -2,7 +2,7 @@
 
 This is a scaled down Twitter Clone built using django rest framework with postgres as the database
 
-** If you want to try it on your local machine , Just update the Databases section on settings.py **
+**If you want to try it on your local machine , Just update the Databases section on settings.py**
 
 API Features:
 
@@ -21,7 +21,7 @@ API Features:
  
  List of Packages used to build this API
  
-  - ** Corsheaders **
-  - ** dj-rest-auth **
-  - ** dj-allauth **
-  - ** drf-spectacular **
+  - **Corsheaders**
+  - **dj-rest-auth**
+  - **dj-allauth**
+  - **drf-spectacular**
