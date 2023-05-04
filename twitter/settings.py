@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'rest_framework.authtoken',
     'drf_spectacular',
+    'drf_yasg',
     #local apps
     'Accounts.apps.AccountsConfig',
     'Apis.apps.ApisConfig',
