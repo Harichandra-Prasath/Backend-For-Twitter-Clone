@@ -17,7 +17,7 @@ API Features:
  
  
  
- ## Packaages 
+ ## Packages 
  
  List of Packages used to build this API
  
