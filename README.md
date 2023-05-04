@@ -25,3 +25,9 @@ API Features:
   - **dj-rest-auth**
   - **dj-allauth**
   - **drf-spectacular**
+  - **drf-yasg**
+
+## Documentation
+
+**Go to /swagger/ Endpoint for Documwntation**
+
