@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+    web:
+      build: .
+      ports:
+        - "8000:8000"
+      environment:
+        - DB_NAME=your_db_name
+        - DB_USER=your_username
+        - DB_PASSWORD=your_password
+        - DB_HOST=db
+        - SECRET_KEY=Your_secret_key
+        - DEBUG=False
+      depends_on:
+        - db
+      
+    
+    db:
+      image: postgres
+      expose:
+        - 5432
+      environment:
+        - POSTGRES_USER=username_you_want_
+        - POSTGRES_PASSWORD=password_you_want_
+        - POSTGRES_DB=databasename_you_want
+      volumes:
+        - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
