@@ -2,7 +2,11 @@
 
 This is a scaled down Twitter Clone built using django rest framework with postgres as the database
 
-**If you want to try it on your local machine , Just update the Databases section on settings.py**
+**You should generate your own secret key in order to access it**
+
+To get your own key, RUN **python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'**
+
+Store the printed key in your .env file
 
 API Features:
 
@@ -27,7 +31,30 @@ API Features:
   - **drf-spectacular**
   - **drf-yasg**
 
+## Usage
+
+**If you want to try it on your local machine , Just update the Databases section on settings.py**
+
+Creae a .env file in the root directory with the following details
+
+- **SECRET_KEY**
+- **DEBUG**
+- **DB_NAME**
+- **DB_USER**
+- **DB_PASSWORD**
+- **DB_HOST**
+
+All DB details are based on your postgres instance
+
+## Running container Instance
+
+To run it as a docker container , Just update the Environment section in docker-compose.yml.Note that DB details in web and db service should be the same.
+After updating (Passing the environment variables) , DO **sudo docker compose up**
+
+After that , You can access the api running inside the container
+
 ## Documentation
 
 **Go to /swagger/ Endpoint for Documwntation**
+
 
