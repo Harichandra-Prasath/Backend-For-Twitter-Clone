@@ -6,12 +6,12 @@ services:
       ports:
         - "8000:8000"
       environment:
-        - DB_NAME=your_db_name
-        - DB_USER=your_username
-        - DB_PASSWORD=your_password
-        - DB_HOST=db
-        - SECRET_KEY=Your_secret_key
-        - DEBUG=False
+         DB_HOST: db
+         DB_NAME: ${DB_NAME}
+         DB_USER: postgres
+         DB_PASSWORD: postgres
+         SECRET_KEY: ${SECRET_KEY}
+         DEBUG: ${DEBUG}
       depends_on:
         - db
       
@@ -21,9 +21,9 @@ services:
       expose:
         - 5432
       environment:
-        - POSTGRES_USER=username_you_want_
-        - POSTGRES_PASSWORD=password_you_want_
-        - POSTGRES_DB=databasename_you_want
+         POSTGRES_USER: postgres
+         POSTGRES_PASSWORD: postgres
+         POSTGRES_DB: ${DB_NAME}
       volumes:
         - db_data:/var/lib/postgresql/data
 
